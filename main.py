@@ -1,42 +1,47 @@
-import vk_api
-import time
 import requests
 
-"""
-vk = vk_api.VkApi(token='169428aad53f73252e0b465e1f2f899c10df80e9024e4f80aa8f9783c5d5a860effa0a20292618fa50c54')
-vk._auth_token()
 
-values = {'out': 0, 'count': 100, 'time_offset': 60}
+group_token = "25e4b62e76e29d2f67a26d27bf43046f74654d030dc85a2b9535b63177da5301a82e53d30e9de24caa805"
 
 
-def write_message(user_id, text):
-    vk.method('messages.send', {'user_id': user_id, 'message': text})
-
-while True:
-    response = vk.method('messages.get', values)
-    if response['items']:
-        values['last_message_id'] = response['items'][0]['id']
-    for item in response['items']:
-        write_message(item['user_id'], 'Привет, кем бы ты не был :)')
-        time.sleep(1)
-
-"""
 
 
-def getUser(url, data=None):
-    request = requests.get(url, params=data)
-    response = request.json()
-    return response
+def sendMessage(user_id, message):
+	response = call_vk_api("messages.send", {'user_id': user_id, 'message':message})
+	return response
+
+def getLongPollServer():
+	response = call_vk_api('groups.getLongPollServer', {'group_id':117644300})
+	return response
+
+def getLongPollEvents(server, key, ts):
+	response = requests.post("%s?act=a_check&key=%s&ts=%s&wait=25" % (server, key, ts))
+	return response.json()
+
+def call_vk_api(method, params):
+	method = "https://api.vk.com/method/%s" % (method)
+	params['access_token'] = group_token
+	params['v'] = '5.74'
+	response = requests.post(method, params).json()['response']
+	return response
 
 
-response = getUser("https://api.vk.com/method/users.get", {'user_id': '47433761', 'v': '5.74'})
-print(response)
+params = getLongPollServer()
 
+while (True):
+	try:
+		result = getLongPollEvents(params['server'], params['key'], params['ts'])
 
-def getLongPollServer(url, data=None):
-    request = requests.get(url, params=data)
-    response = request.json()
-    return response
+		params['ts'] = result['ts']
 
-response = getUser("https://api.vk.com/method/groups.getLongPollServer", {'group_id': '117644300'})
-print(response)
+		events = result['updates']
+
+		for event in events:
+			if event['type'] == 'message_new':
+				sendMessage(event['object']['user_id'], "ddd")
+
+		print(result)
+	except Exception as e:
+		print(e)
+		
+

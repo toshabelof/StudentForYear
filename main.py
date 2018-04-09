@@ -202,12 +202,38 @@ def getMemberByMessage(message):
 
 	return None
 
+def getSurnameById(member_id):
+	result = None
+	f = open('votes')
+	for m in members:
+		if m['id'] == member_id:
+			result = m['surname']
+			break
+	f.close()
+	return result
 
 params = getLongPollServer()
 
 
+def calculate():
+	str = ""
+	map = dict()
 
+	f = open('votes')
+	for line in f:
+		obj = json.loads(line)
 
+		member_id = obj['member_id']
+
+		if not member_id in map:
+			map[member_id] = []
+
+		map[member_id].append(obj)
+
+	for key, value in map.items():
+		str += "%s : %d \n" % (getSurnameById(key), len(value))
+
+	return str
 
 while (True):
 	try:
@@ -223,7 +249,10 @@ while (True):
 				user_id = event['object']['user_id']
 				body = event['object']['body']
 
-				if (is_vote(user_id)):
+				if(body == 'result'):
+					result = calculate()
+					sendMessage(user_id, result)
+				elif (is_vote(user_id)):
 					sendMessage(user_id, 'Вы уже головали')
 				else:
 					member = getMemberByMessage(body)

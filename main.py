@@ -142,6 +142,10 @@ print(listUser_id)
 
 import requests
 
+users = []
+
+users[0] = {'surname':'Осюков', 'str':'Осюков'}
+
 group_token = "25e4b62e76e29d2f67a26d27bf43046f74654d030dc85a2b9535b63177da5301a82e53d30e9de24caa805"
 
 
@@ -166,6 +170,8 @@ def call_vk_api(method, params):
     params['v'] = '5.74'
     response = requests.post(method, params).json()['response']
     return response
+
+
 
 
 params = getLongPollServer()

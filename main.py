@@ -192,8 +192,6 @@ def is_vote(user_id):
 	f.close()
 	return result
 
-	f.write(json.dumps({'user_id': user_id, 'member_id': member_id, 'date': time.time()}) + '\n')
-	f.close()
 
 # функция парсит сообщение и возвращает id  участника или none
 def getMemberByMessage(message):
@@ -203,9 +201,6 @@ def getMemberByMessage(message):
 			return m
 
 	return None
-
-
-
 
 
 params = getLongPollServer()

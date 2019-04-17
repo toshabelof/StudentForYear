@@ -4,14 +4,18 @@ import requests
 
 members = []
 
-members.append({'id': 0, 'surname': 'Удалова', 'str': 'Удалов'})
-members.append({'id': 1, 'surname': 'Дробинина', 'str': 'Дробинин'})
-members.append({'id': 2, 'surname': 'Марков', 'str': 'Марков'})
-members.append({'id': 3, 'surname': 'Бутурлакин', 'str': 'Бутурлакин'})
-members.append({'id': 4, 'surname': 'Левичев', 'str': 'Левиче'})
-members.append({'id': 5, 'surname': 'Шумилова', 'str': 'Шумилов'})
-members.append({'id': 6, 'surname': 'Боднарюк', 'str': 'Боднарюк'})
-members.append({'id': 7, 'surname': 'Киселёва', 'str': 'Кисел'})
+
+members.append({'id': 0, 'surname': 'Тенигина', 'str': 'Тенигин'})
+members.append({'id': 1, 'surname': 'Сушинский', 'str': 'Сушинск'})
+members.append({'id': 2, 'surname': 'Соболев', 'str': 'Соболев'})
+members.append({'id': 3, 'surname': 'Сафаров', 'str': 'Сафаров'})
+members.append({'id': 4, 'surname': 'Савинов', 'str': 'Савинов'})
+members.append({'id': 5, 'surname': 'Мазурова', 'str': 'Мазуров'})
+members.append({'id': 6, 'surname': 'Иванова Е', 'str': 'Иванова E'})
+members.append({'id': 7, 'surname': 'Иванова М', 'str': 'Иванова М'})
+members.append({'id': 8, 'surname': 'Григорьев', 'str': 'Григорьев'})
+members.append({'id': 9, 'surname': 'Боиштяну', 'str': 'Боиштяну'})
+
 
 group_token = "25e4b62e76e29d2f67a26d27bf43046f74654d030dc85a2b9535b63177da5301a82e53d30e9de24caa805"
 

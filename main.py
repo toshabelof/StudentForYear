@@ -11,7 +11,7 @@ members.append({'id': 2, 'surname': 'Соболев', 'str': 'Соболев'})
 members.append({'id': 3, 'surname': 'Сафаров', 'str': 'Сафаров'})
 members.append({'id': 4, 'surname': 'Савинов', 'str': 'Савинов'})
 members.append({'id': 5, 'surname': 'Мазурова', 'str': 'Мазуров'})
-members.append({'id': 6, 'surname': 'Иванова Е', 'str': 'Иванова E'})
+members.append({'id': 6, 'surname': 'Иванова Е', 'str': 'Иванова Е'})
 members.append({'id': 7, 'surname': 'Иванова М', 'str': 'Иванова М'})
 members.append({'id': 8, 'surname': 'Григорьев', 'str': 'Григорьев'})
 members.append({'id': 9, 'surname': 'Боиштяну', 'str': 'Боиштяну'})
@@ -32,7 +32,7 @@ def getLongPollServer():
 
 def getLongPollEvents(server, key, ts):
 	response = requests.post("%s?act=a_check&key=%s&ts=%s&wait=25" % (server, key, ts))
-	print(response)
+	print(response.json())
 	return response.json()
 
 
@@ -142,7 +142,7 @@ while (True):
 							save_vote(user_id, member['id'])
 							sendMessage(user_id, 'Ваш голос принят!')
 						else:
-							sendMessage(user_id, 'Отправьте фамилию участника за которого хотели бы проголовать:\nОльга Боднарюк\nАндрей Бутурлакин\nНаталия Дробинина\nЛада Киселёва\nЕвгений Левичев\nСтепан Марков\nАнастасия Удалова\nЭльвира Шумилова')
+							sendMessage(user_id, 'Отправьте фамилию участника за которого хотели бы проголовать:\nБоиштяну Яна\nГригорьев Александр\nИванова Екатерина\nИванова Мария\nМазурова Анна\nСавинов Александр\nСафаров Илхом\nСоболев Алексей\nСушинский Кирилл\nТенигина Анастасия')
 
 	except Exception as e:
 		# params = getLongPollServer()
